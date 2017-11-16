@@ -25,7 +25,5 @@ var express = require('express'),
 
 db.connect('mongodb://localhost:27017/shortshit', function(err){
 	if(err) return console.log(err);
-	app.listen(4188, function(){
-		console.log('server is runing');
-	})	
+	app.listen(3000, ()=>console.log('server is runing'));	
 })
