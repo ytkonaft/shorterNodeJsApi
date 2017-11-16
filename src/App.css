@@ -1,0 +1,12 @@
+body {
+  background-color: #fff;
+  margin: 0;
+  padding: 0; }
+
+header {
+  background-color: #181d22;
+  color: #fff;
+  text-align: center; }
+  header .logo {
+    display: inline-block;
+    max-width: 80px; }
