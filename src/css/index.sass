@@ -2,16 +2,26 @@
 @import "var.sass"
 
 
-+font-face("CaviarDreams", "../fonts/CaviarDreams", normal, $file-formats: eot woff ttf svg) 
+// +font-face("CaviarDreams", "../fonts/radikal", normal, $file-formats: ttf) 
+// +font-face("CaviarDreamsBold", "../fonts/Caviar_Dreams_Bold", normal, $file-formats: eot woff ttf svg) 
 
 body
 	background: $body-bg
 	margin: 0
 	padding: 0
-	font-family: "CaviarDreams","Helvetica Neue",Helvetica,Arial,sans-serif !important
+	font-family: "Cabin",sans-serif,Helvetica,Arial !important
 *
 	outline: none	
 
 #root
 	min-height: 100vh
 	background-color: $body-bg	
+
+.green-btn 
+	background-color: #06E896
+	border: none	
+	padding: 10px
+	margin: 0
+	+transition(all 0.3s ease)
+	&:hover
+		background-color: $blue-main

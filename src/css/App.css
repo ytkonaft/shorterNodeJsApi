@@ -1,23 +1,91 @@
 header {
   background-color: #181d22;
   color: #fff;
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3); }
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 90; }
   header #logo {
     display: block;
     border-radius: 50%;
-    background-color: #439fe0;
-    background-image: url(../ufo.svg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 45px;
     position: absolute;
     top: 5px;
     left: 10px;
     height: 70px;
+    background-color: #439fe0;
     width: 70px;
     border: 2px solid #181d22;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3); }
+    header #logo:hover:after {
+      -webkit-transform: rotateY(0deg);
+      -moz-transform: rotateY(0deg);
+      -ms-transform: rotateY(0deg);
+      -o-transform: rotateY(0deg);
+      transform: rotateY(0deg);
+      -webkit-transition: all 0.2s ease 0.2s;
+      -moz-transition: all 0.2s ease 0.2s;
+      transition: all 0.2s ease 0.2s; }
+    header #logo:hover:before {
+      -webkit-transform: rotateY(-90deg);
+      -moz-transform: rotateY(-90deg);
+      -ms-transform: rotateY(-90deg);
+      -o-transform: rotateY(-90deg);
+      transform: rotateY(-90deg);
+      -webkit-transition: all 0.2s ease;
+      -moz-transition: all 0.2s ease;
+      transition: all 0.2s ease; }
+    header #logo:after, header #logo:before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      content: ''; }
+    header #logo:before {
+      background-image: url(../img/ufo.svg);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 45px;
+      -webkit-transform: rotateY(0deg);
+      -moz-transform: rotateY(0deg);
+      -ms-transform: rotateY(0deg);
+      -o-transform: rotateY(0deg);
+      transform: rotateY(0deg);
+      -webkit-transition: all 0.2s ease 0.2s;
+      -moz-transition: all 0.2s ease 0.2s;
+      transition: all 0.2s ease 0.2s; }
+    header #logo:after {
+      background-image: url(../img/question.svg);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 40px;
+      -webkit-transform: rotateY(90deg);
+      -moz-transform: rotateY(90deg);
+      -ms-transform: rotateY(90deg);
+      -o-transform: rotateY(90deg);
+      transform: rotateY(90deg);
+      -webkit-transition: all 0.2s ease;
+      -moz-transition: all 0.2s ease;
+      transition: all 0.2s ease; }
   header h1 {
     padding-left: 80px;
     margin: 20px 0 10px;
-    text-transform: uppercase; }
+    text-transform: uppercase;
+    font-size: 22px;
+    line-height: 22px; }
+    header h1 a {
+      line-height: 14px;
+      font-size: 12px;
+      display: table;
+      font-weight: 600;
+      -webkit-transition: all 0.3s ease;
+      -moz-transition: all 0.3s ease;
+      transition: all 0.3s ease; }
+      header h1 a:hover {
+        text-shadow: 1px 1px 1px #439fe0; }
+
+#content {
+  min-height: 200px;
+  background-color: #fff;
+  padding-top: 40px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+  border-radius: 0 0 10px 10px; }
