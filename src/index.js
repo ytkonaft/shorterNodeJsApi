@@ -1,6 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
+import ReactDOM from 'react-dom';import './css/index.css';
+import './css/btstrp.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 

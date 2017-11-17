@@ -2,8 +2,8 @@ var express = require('express'),
 		bodyParser = require('body-parser'),
 		MongoClient = require('mongodb').MongoClient,
 		ObjectID = require('mongodb').ObjectID,
-		db = require('./db.js'),
-		LinksController = require('./controllers/links'),
+		db = require('./server/db.js'),
+		LinksController = require('./server/controllers/links'),
 		app = express();
 
 
