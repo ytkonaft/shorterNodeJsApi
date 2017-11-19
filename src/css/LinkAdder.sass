@@ -12,6 +12,23 @@
 		margin-right: -40px
 		&:last-child
 			margin-left: 40px
+	.copy-wrp
+		position: relative
+		input
+			position: relative
+			z-index: 3
+		button
+			z-index: 2
+			background-color: $green-main
+			border-radius: 5px 5px 0 0
+			width: 30px
+			height: 30px 
+			border: none		
+			position: absolute
+			top: -30px
+			right: 5px
+			box-shadow: 1px 1px 4px rgba(0,0,0,.3)
+		
 	.alert
 		position: absolute
 		background-color: $invalid-color
@@ -74,6 +91,7 @@
 			border-radius: 50%
 			max-width: 100%
 			background-color: #fff
+			z-index: 3
 			padding: 2px
 			@include transform(translateX(-50%) translateY(-50%))
 		&.has-img
@@ -85,11 +103,12 @@
 		line-height: 30px
 		padding-left: 10px
 		font-size: 15px
-		background-color: transparent
+		background-color: #fff
 		border-radius: 3px
 		+transition(all 0.3s ease)
 		padding-right: 10px
 		border: none
+		box-shadow: 1px 1px 4px rgba(0,0,0,.3)
 		&#urlInput,
 		&.shortUrl 
 			background-color: #fff	

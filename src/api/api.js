@@ -4,7 +4,6 @@ import { apiPrefix } from '../etc/config.json';
 
 export default {
     listLnks() {
-    	console.log(apiPrefix);
         return axios.get(`${apiPrefix}/all/`);
     },
 

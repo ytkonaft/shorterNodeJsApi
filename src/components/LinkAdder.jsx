@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import '../css/LinkAdder.css';
 import validUrl from 'valid-url';
-var timerId;
+import axios from 'axios';
+
+var timerId,
+    gglKey ='AIzaSyC1hWR-KdjZtVkYp6jBggRmWLHVxPphWks';
 class LinkAdder extends Component {
   constructor(props) {
     super(props);
     this.state = {
-    	ttl: '',
+    	name: '',
   		longUrl: '',
-  		shortUrl: '',
+  		urlShort: '',
       img: '',
   		hasEror: false
     	};
@@ -17,6 +20,10 @@ class LinkAdder extends Component {
     this.checkValid = this.checkValid.bind(this);
     this.isValid = this.isValid.bind(this);
     this.checkBlur = this.checkBlur.bind(this);
+    this.handleNameChange = this.handleNameChange.bind(this);
+    this.createShortUrl = this.createShortUrl.bind(this);
+
+
   }	
   checkValid(elm){
   	let res = validUrl.isUri(elm.value),
@@ -37,14 +44,19 @@ class LinkAdder extends Component {
   	elm.parentNode.classList.remove('inFocus','hasError');
   	let imgWrp = document.getElementById('link-img'),
   			favIcon = document.createElement('img'),
-  			imgSrc = 'https:/'+'/'+ 'www.google.com/s2/favicons?domain='+elm.value
+  			imgSrc = 'https:/'+'/'+ 'www.google.com/s2/favicons?domain='+elm.value;
   	this.setState({img: imgSrc});
   	this.setState({hasEror: false})
   			imgWrp.innerHTML = '';
   			favIcon.src = imgSrc;
   			imgWrp.appendChild(favIcon);
   			imgWrp.classList.add('has-img');
-
+  
+  this.createShortUrl(elm.value);
+    
+  }
+  handleNameChange(e){
+    this.setState({name: e.target.value});
   }
   handleLinkChange(e){
   	clearTimeout(timerId);
@@ -52,6 +64,27 @@ class LinkAdder extends Component {
   	this.setState({longUrl: e.target.value});
   	var elm = e.target || e.srcElement || this; 
   	timerId = setTimeout(()=>this.checkValid(elm),1000);
+  }
+  createShortUrl(url){
+    let that = this;
+     axios.post(`https:/`+`/www.googleapis.com/urlshortener/v1/url?key=${gglKey}`, 
+     {
+      "longUrl": url
+      },
+      {
+        headers: {
+              'Content-Type': 'application/json',
+          }
+      }   
+    )
+    .then(function (response) {
+      that.loadShortLnk({urlShort: response.data.id});
+    })
+    .catch((error)=>console.log(error))
+  }
+  loadShortLnk(prps){
+    this.setState(prps);
+    console.log(this.state);
   }
   checkFocus(e){
   	e.target.parentNode.classList.add('inFocus');
@@ -61,16 +94,17 @@ class LinkAdder extends Component {
   	this.checkValid(e.target);
   }  
   handleLinkAdd(){
+    console.log(this.state.longUrl);
   	const newLnk = {
-  		name: this.state.ttl,
+  		name: this.state.name,
 			longUrl: this.state.longUrl,
-			urlShort: this.state.shortUrl
+			urlShort: this.state.urlShort
   	}
   	this.props.onLinkAdd(newLnk);
   	this.setState({
-  		ttl: '',
+  		name: '',
   		longUrl: '',
-  		shortUrl: '',
+  		urlShort: '',
       img: '',
   		hasEror: false
   	});
@@ -95,16 +129,21 @@ class LinkAdder extends Component {
     				</div>
     			</div>
     			<div className="col-md-3">
-    				<input type="text" 
-    								className="shortUrl" 
-    								readOnly="true" 
-    								placeholder="Short URL will be here" 
-    								value={this.state.shortUrl}/>
+            <div className="copy-wrp">
+    				  <input type="text" 
+    				  				className="shortUrl" 
+    				  				readOnly="true" 
+    				  				placeholder="Short URL will be here" 
+                      value={this.state.urlShort}/>
+              <button></button>        
+            </div>        
     			</div>
     			<div className="col-md-3">
     				<input type="text"
+                    id="shortInput"
     								placeholder="ttl of url" 
-    								value={this.state.ttl}/>
+                    onChange={this.handleNameChange}
+                    value={this.state.name}/>
     			</div>
     			<div className="col-md-1">
     				<button className="green-btn" onClick={this.handleLinkAdd}></button>

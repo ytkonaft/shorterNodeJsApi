@@ -9,6 +9,7 @@ import LinksGrid from './LinksGrid.jsx';
 
 
 function getFluxState(){
+  console.log(LnksStore.getLnks());
   return{
     isLoading: LnksStore.isLoading(),
     lnks: LnksStore.getLnks()
@@ -32,6 +33,7 @@ class App extends Component {
     LnksStore.removeChangeListener(this._onChange); 
   }  
   handleLinkAdd(data){
+    console.log(data);
     LnksActions.createLnks(data); 
   }
   handleLinkDelete(lnk){
@@ -42,12 +44,13 @@ class App extends Component {
       <section className="App">
         <header>
           <div className="container">
-            <div className="col-sm-4">
+            <div className="col-sm-5">
               <a id="logo" alt="logo"></a>
               <h1 className="App-title">the cutter <a>by ufo-engineering</a></h1>
             </div>
-            <div className="col-sm-4">
-              пока пусто
+            <div className="col-sm-7 text-right">
+              <button className="green-btn _main">Sign in</button>
+              <button className="blue-btn _main">Sign up</button>
             </div>
           </div>
         </header>

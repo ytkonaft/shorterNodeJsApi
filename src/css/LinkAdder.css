@@ -9,6 +9,22 @@
     margin-right: -40px; }
     #add-wrp .col-md-1:last-child {
       margin-left: 40px; }
+  #add-wrp .copy-wrp {
+    position: relative; }
+    #add-wrp .copy-wrp input {
+      position: relative;
+      z-index: 3; }
+    #add-wrp .copy-wrp button {
+      z-index: 2;
+      background-color: #06E896;
+      border-radius: 5px 5px 0 0;
+      width: 30px;
+      height: 30px;
+      border: none;
+      position: absolute;
+      top: -30px;
+      right: 5px;
+      box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3); }
   #add-wrp .alert {
     position: absolute;
     background-color: #E85906;
@@ -77,6 +93,7 @@
       border-radius: 50%;
       max-width: 100%;
       background-color: #fff;
+      z-index: 3;
       padding: 2px;
       -webkit-transform: translateX(-50%) translateY(-50%);
       -moz-transform: translateX(-50%) translateY(-50%);
@@ -92,13 +109,14 @@
     line-height: 30px;
     padding-left: 10px;
     font-size: 15px;
-    background-color: transparent;
+    background-color: #fff;
     border-radius: 3px;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     transition: all 0.3s ease;
     padding-right: 10px;
-    border: none; }
+    border: none;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3); }
     #add-wrp input#urlInput, #add-wrp input.shortUrl {
       background-color: #fff; }
   #add-wrp .valid-wrp {

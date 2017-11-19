@@ -23,10 +23,12 @@ exports.findById = function(req,res){
 	}
 
 exports.create = function(req,res){
+	console.log(req.body)
 	var newLink ={
 			name: req.body.name,
-			img: req.body.img,
-			urlShort: req.body.urlShort
+			urlShort: req.body.urlShort,
+			longUrl: req.body.longUrl
+
 		};
 	Links.create(newLink,	
 		function(err,result){

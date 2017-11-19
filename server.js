@@ -10,11 +10,11 @@ var express = require('express'),
 
 
 		app.use(bodyParser.json());
-		app.use(cors({origin: '*'}));
 		app.use(bodyParser.urlencoded({extended:true}));
+		app.use(cors({origin: '*'}));
 
 
-	app.get('/all/ 	', LinksController.all)
+	app.get('/all/', LinksController.all)
 
 	app.get('/find/:id', LinksController.findById)
 
@@ -28,5 +28,5 @@ var express = require('express'),
 
 db.connect(`mongodb://${config.db.host}:${config.db.port}/${config.db.name}`, function(err){
 	if(err) return console.log(err);
-	app.listen(config.serverPort, ()=>console.log('server is runing in ' + config.serverPort));	
+	app.listen(3000, ()=>console.log('server is runing in ' + config.serverPort));	
 })
