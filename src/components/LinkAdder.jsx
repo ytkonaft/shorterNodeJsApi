@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../css/LinkAdder.css';
 import validUrl from 'valid-url';
 import axios from 'axios';
-
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 var timerId,
     gglKey ='AIzaSyC1hWR-KdjZtVkYp6jBggRmWLHVxPphWks';
 class LinkAdder extends Component {
@@ -13,7 +13,8 @@ class LinkAdder extends Component {
   		longUrl: '',
   		urlShort: '',
       img: '',
-  		hasEror: false
+  		valid: false,
+      copied: false
     	};
     this.handleLinkChange = this.handleLinkChange.bind(this);
     this.handleLinkAdd = this.handleLinkAdd.bind(this);
@@ -30,7 +31,11 @@ class LinkAdder extends Component {
   			imgWrp = document.getElementById('link-img');
   	if(!res) {
   		elm.parentNode.classList.add('hasError'); 
-  		this.setState({hasEror: true})
+  		this.setState({valid: false,
+                      urlShort: '',
+                      img: '',
+                      name: ''
+                    });
   		imgWrp.innerHTML = '';
   		imgWrp.classList.remove('has-img')
 	  	if(elm.value==='')	elm.parentNode.classList.remove('hasError');
@@ -51,9 +56,10 @@ class LinkAdder extends Component {
   			favIcon.src = imgSrc;
   			imgWrp.appendChild(favIcon);
   			imgWrp.classList.add('has-img');
-  
   this.createShortUrl(elm.value);
-    
+    console.log(this.state)
+  this.setState({valid: true})
+    console.log(this.state)
   }
   handleNameChange(e){
     this.setState({name: e.target.value});
@@ -61,7 +67,8 @@ class LinkAdder extends Component {
   handleLinkChange(e){
   	clearTimeout(timerId);
   	e.target.parentNode.classList.remove('hasError');
-  	this.setState({longUrl: e.target.value});
+  	this.setState({longUrl: e.target.value,
+                   copied: false});
   	var elm = e.target || e.srcElement || this; 
   	timerId = setTimeout(()=>this.checkValid(elm),1000);
   }
@@ -84,7 +91,6 @@ class LinkAdder extends Component {
   }
   loadShortLnk(prps){
     this.setState(prps);
-    console.log(this.state);
   }
   checkFocus(e){
   	e.target.parentNode.classList.add('inFocus');
@@ -94,7 +100,6 @@ class LinkAdder extends Component {
   	this.checkValid(e.target);
   }  
   handleLinkAdd(){
-    console.log(this.state.longUrl);
   	const newLnk = {
   		name: this.state.name,
 			longUrl: this.state.longUrl,
@@ -106,7 +111,8 @@ class LinkAdder extends Component {
   		longUrl: '',
   		urlShort: '',
       img: '',
-  		hasEror: false
+  		hasEror: false,
+      copied: false
   	});
   }
   render() {
@@ -135,7 +141,15 @@ class LinkAdder extends Component {
     				  				readOnly="true" 
     				  				placeholder="Short URL will be here" 
                       value={this.state.urlShort}/>
-              <button></button>        
+
+                  <CopyToClipboard text={this.state.urlShort}
+                                    onCopy={() => this.setState({copied: true})}>
+                      <button className={
+                              this.state.valid ? 'up' : 'down'
+                              // this.state.copied ? 'copied' : null
+                      }/>
+                  </CopyToClipboard>
+ 
             </div>        
     			</div>
     			<div className="col-md-3">
