@@ -18,10 +18,22 @@ body
 	background-color: $body-bg	
 
 .green-btn 
-	background-color: #06E896
+	background-color: $green-main
 	border: none	
 	padding: 10px
 	margin: 0
 	+transition(all 0.3s ease)
 	&:hover
 		background-color: $blue-main
+
+.ttl
+	padding: 40px 15px 10px
+	h2 
+		margin: 0
+		font-size: 28px
+
+
+@media screen and (max-width: 992px)
+	
+	.ttl
+		padding-left: 0

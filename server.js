@@ -1,5 +1,7 @@
 var express = require('express'),
 		bodyParser = require('body-parser'),
+		cors = require('cors'),
+		config = require('./src/etc/config.json'),		
 		MongoClient = require('mongodb').MongoClient,
 		ObjectID = require('mongodb').ObjectID,
 		db = require('./server/db.js'),
@@ -8,10 +10,11 @@ var express = require('express'),
 
 
 		app.use(bodyParser.json());
+		app.use(cors({origin: '*'}));
 		app.use(bodyParser.urlencoded({extended:true}));
 
 
-	app.get('/', LinksController.all)
+	app.get('/all/ 	', LinksController.all)
 
 	app.get('/find/:id', LinksController.findById)
 
@@ -19,11 +22,11 @@ var express = require('express'),
 
 	app.put('/update/:id', LinksController.update)
 
-	app.delete('/:id', LinksController.delete)
+	app.delete('/delete/:id', LinksController.delete)
 
 
 
-db.connect('mongodb://localhost:27017/shortshit', function(err){
+db.connect(`mongodb://${config.db.host}:${config.db.port}/${config.db.name}`, function(err){
 	if(err) return console.log(err);
-	app.listen(3000, ()=>console.log('server is runing'));	
+	app.listen(config.serverPort, ()=>console.log('server is runing in ' + config.serverPort));	
 })

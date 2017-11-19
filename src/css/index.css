@@ -21,3 +21,13 @@ body {
   transition: all 0.3s ease; }
   .green-btn:hover {
     background-color: #439fe0; }
+
+.ttl {
+  padding: 40px 15px 10px; }
+  .ttl h2 {
+    margin: 0;
+    font-size: 28px; }
+
+@media screen and (max-width: 992px) {
+  .ttl {
+    padding-left: 0; } }

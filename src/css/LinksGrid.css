@@ -1,0 +1,28 @@
+#linksGrid {
+  padding-bottom: 40px; }
+  #linksGrid .link-itm {
+    background: #eee;
+    padding: 5px;
+    color: #333;
+    width: 100%;
+    height: 150px;
+    margin: 25px 0 0;
+    text-align: center;
+    border-radius: 10px; }
+  #linksGrid .img-wrp {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #fff;
+    line-height: 50px;
+    background-color: #06E896;
+    border-radius: 50%;
+    margin: 0 auto;
+    position: relative;
+    top: -25px; }
+  #linksGrid input {
+    height: 35px;
+    padding: 0 10px;
+    font-size: 16px;
+    width: 100%;
+    border: none;
+    border-radius: 3px; }
