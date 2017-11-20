@@ -31,6 +31,9 @@
         position: absolute;
         left: 50%;
         bottom: 100%;
+        -webkit-transition: all 0.3s ease;
+        -moz-transition: all 0.3s ease;
+        transition: all 0.3s ease;
         -webkit-transform: translateX(-50%);
         -moz-transform: translateX(-50%);
         -ms-transform: translateX(-50%);
@@ -195,6 +198,20 @@
 @media screen and (max-width: 992px) {
   #add-wrp {
     border-radius: 10px; }
+    #add-wrp .copy-wrp button {
+      height: 100%;
+      z-index: 4;
+      top: auto !important;
+      bottom: -5px !important;
+      right: -70px;
+      overflow: hidden; }
+      #add-wrp .copy-wrp button:after {
+        background-size: 25px; }
+      #add-wrp .copy-wrp button.up {
+        right: -20px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%; }
     #add-wrp .green-btn {
       margin-top: 10px;
       position: relative;
