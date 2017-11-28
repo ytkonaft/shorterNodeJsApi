@@ -33,11 +33,10 @@ class App extends Component {
     LnksStore.removeChangeListener(this._onChange); 
   }  
   handleLinkAdd(data){
-    console.log(data);
     LnksActions.createLnks(data); 
   }
-  handleLinkDelete(lnk){
-    LnksActions.delete(lnk.id); 
+  handleLinkDelete(id){
+    LnksActions.deleteLnk(id); 
   }  
   render() {
     return (

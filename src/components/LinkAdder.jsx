@@ -57,9 +57,9 @@ class LinkAdder extends Component {
   			imgWrp.appendChild(favIcon);
   			imgWrp.classList.add('has-img');
   this.createShortUrl(elm.value);
-    console.log(this.state)
+  console.log(this.createShortUrl(elm.value));
   this.setState({valid: true})
-    console.log(this.state)
+  this.setState({name:this.getName(elm.value)});
   }
   handleNameChange(e){
     this.setState({name: e.target.value});
@@ -71,6 +71,18 @@ class LinkAdder extends Component {
                    copied: false});
   	var elm = e.target || e.srcElement || this; 
   	timerId = setTimeout(()=>this.checkValid(elm),1000);
+  }
+  getName(url) {
+      let hostname;
+      if (url.indexOf(':/'+'/') > -1) {
+          hostname = url.split('/')[2];
+      }
+      else {
+          hostname = url.split('/')[0];
+      }
+      hostname = hostname.split(':')[0];
+      hostname = hostname.split('?')[0];
+      return hostname;
   }
   createShortUrl(url){
     let that = this;
@@ -87,7 +99,10 @@ class LinkAdder extends Component {
     .then(function (response) {
       that.loadShortLnk({urlShort: response.data.id});
     })
-    .catch((error)=>console.log(error))
+    .catch((error)=>{
+      // that.loadShortLnk({urlShort: response.data.id});
+      console.log(error);
+    })
   }
   loadShortLnk(prps){
     this.setState(prps);
@@ -114,6 +129,9 @@ class LinkAdder extends Component {
   		hasEror: false,
       copied: false
   	});
+    let imgWrp = document.getElementById('link-img');
+        imgWrp.innerHTML = '';
+        imgWrp.classList.remove('has-img');
   }
   render() {
     return (

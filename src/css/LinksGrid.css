@@ -4,10 +4,24 @@
     background: #eee;
     padding: 5px;
     color: #333;
+    position: relative;
     width: 100%;
+    padding-top: 30px;
     margin: 25px 0 0;
     text-align: center;
     border-radius: 10px; }
+  #linksGrid .remove-btn {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border: 4px solid #fff;
+    border-radius: 50%;
+    background: url(../img/rubbish.svg) center center no-repeat;
+    background-size: 20px;
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #E85906; }
   #linksGrid .img-wrp {
     width: 50px;
     height: 50px;
@@ -15,8 +29,9 @@
     line-height: 40px;
     background-color: #06E896;
     border-radius: 50%;
-    margin: 0 auto;
-    position: relative;
+    margin-left: -25px;
+    left: 50%;
+    position: absolute;
     top: -25px; }
     #linksGrid .img-wrp img {
       position: relative;
@@ -34,6 +49,27 @@
     padding: 0 10px;
     font-size: 16px;
     width: 100%;
-    margin: 5px 0;
-    border: none;
-    border-radius: 3px; }
+    margin: 0;
+    border: none; }
+  #linksGrid .input-wrp {
+    position: relative;
+    border-radius: 3px;
+    overflow: hidden; }
+    #linksGrid .input-wrp button {
+      width: 50px;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      border: none;
+      background-color: #06E896;
+      color: #fff;
+      background-image: url(../img/copy.svg);
+      background-repeat: no-repeat;
+      background-size: 20px;
+      background-position: center;
+      -webkit-transition: all 0.3s ease;
+      -moz-transition: all 0.3s ease;
+      transition: all 0.3s ease; }
+      #linksGrid .input-wrp button:hover {
+        background-color: #439fe0; }
