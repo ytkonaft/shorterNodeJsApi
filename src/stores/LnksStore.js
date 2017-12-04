@@ -18,7 +18,7 @@ function formatLnk(lnk) {
     };
 }
 
-const TasksStore = Object.assign({}, EventEmitter.prototype, {
+const LnkStore = Object.assign({}, EventEmitter.prototype, {
     isLoading() {
         return _isLoading;
     },
@@ -45,7 +45,7 @@ AppDispatcher.register(function(action) {
         case AppConstants.LOAD_LNKS_REQUEST: {
             _isLoading = true;
 
-            TasksStore.emitChange();
+            LnkStore.emitChange();
             break;
         }
 
@@ -54,14 +54,14 @@ AppDispatcher.register(function(action) {
             _lnks = action.lnks.map( formatLnk );
             _loadingError = null;
 
-            TasksStore.emitChange();
+            LnkStore.emitChange();
             break;
         }
 
         case AppConstants.LOAD_LNKS_FAIL: {
             _loadingError = action.error;
 
-            TasksStore.emitChange();
+            LnkStore.emitChange();
             break;
         }
 
@@ -71,4 +71,4 @@ AppDispatcher.register(function(action) {
     }
 });
 
-export default TasksStore;
+export default LnkStore;

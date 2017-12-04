@@ -4,6 +4,84 @@ header {
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
   position: relative;
   z-index: 90; }
+  header.notenter {
+    display: block;
+    top: 50px;
+    width: 400px;
+    margin: 0 auto 0;
+    border-radius: 15px; }
+    header.notenter button.active {
+      text-decoration: underline; }
+    header.notenter .col-sm-5,
+    header.notenter .col-sm-7 {
+      width: 100%;
+      text-align: center; }
+    header.notenter .col-sm-7 {
+      margin-bottom: 10px; }
+    header.notenter form {
+      background-color: transparent;
+      padding: 0 15px;
+      overflow: hidden; }
+    header.notenter .valid-wrp {
+      position: relative;
+      margin: 10px 0 15px; }
+      header.notenter .valid-wrp.has-error:after {
+        background-color: #E85906;
+        width: 100%; }
+      header.notenter .valid-wrp:after {
+        position: absolute;
+        height: 2px;
+        background-color: #439fe0;
+        width: 0;
+        content: '';
+        bottom: 0px;
+        left: 50%;
+        z-index: 22;
+        -webkit-transition: all 0.3s ease;
+        -moz-transition: all 0.3s ease;
+        transition: all 0.3s ease;
+        -webkit-transform: translateX(-50%);
+        -moz-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+        -o-transform: translateX(-50%);
+        transform: translateX(-50%); }
+      header.notenter .valid-wrp.active:after {
+        width: 100%; }
+    header.notenter input {
+      display: block;
+      width: 100%;
+      height: 34px;
+      background-color: transparent;
+      margin: 0;
+      color: #fff;
+      position: relative;
+      z-index: 1;
+      border: none;
+      font-size: 18px;
+      font-family: 'Cabin';
+      border-bottom: 2px solid #fff;
+      text-align: center; }
+      header.notenter input[type="submit"] {
+        border: none;
+        font-size: 18px;
+        border-radius: 8px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        height: 45px;
+        text-transform: uppercase;
+        color: #181d22;
+        background-color: #06E896; }
+    header.notenter a#logo {
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      margin-left: -35px; }
+    header.notenter h1 {
+      text-align: center;
+      padding: 25px 0	0;
+      margin-bottom: 0; }
+      header.notenter h1 a {
+        margin: 0 auto; }
   header #logo {
     display: block;
     border-radius: 50%;
@@ -72,6 +150,9 @@ header {
     text-transform: uppercase;
     font-size: 22px;
     line-height: 22px; }
+    header h1 i {
+      font-style: normal;
+      text-transform: lowercase; }
     header h1 a {
       line-height: 14px;
       font-size: 12px;

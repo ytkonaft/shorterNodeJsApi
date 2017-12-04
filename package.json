@@ -28,9 +28,12 @@
     "mongodb": "^2.2.33",
     "node-sass-chokidar": "0.0.3",
     "npm-run-all": "^4.1.2",
-    "react": "^16.1.1",
+    "react": "^16.2.0",
+    "react-addons-css-transition-group": "^15.6.2",
+    "react-collapse": "^4.0.3",
     "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.1.1",
+    "react-motion": "^0.5.2",
     "react-scripts": "^1.0.17",
     "valid-url": "^1.0.9"
   }

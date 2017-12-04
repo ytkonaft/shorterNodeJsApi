@@ -9,6 +9,81 @@ header
 	box-shadow: $shadow
 	position: relative
 	z-index: 90
+	&.notenter
+		display: block
+		top: 50px
+		width: 400px 
+		margin: 0 auto 0
+		border-radius: 15px
+		button.active
+			text-decoration: underline
+		.col-sm-5,
+		.col-sm-7
+			width: 100% 
+			text-align: center
+		.col-sm-7
+			margin-bottom: 10px	
+		form 
+			background-color: transparent
+			padding: 0 15px
+			// border-radius: 0 0 15px 15px 
+			overflow: hidden
+		.valid-wrp
+			position: relative
+			margin: 10px 0 15px	
+			&.has-error
+				&:after 
+					background-color: $invalid-color
+					width: 100%
+			&:after 
+				position: absolute
+				height: 2px 
+				background-color: $blue-main 
+				width: 0 
+				content: ''
+				bottom: 0px 
+				left: 50% 
+				z-index: 22
+				+transition(all 0.3s ease)
+				@include transform(translateX(-50%))
+			&.active
+				&:after 
+					width: 100%	
+		input 
+			display: block
+			width: 100%
+			height: 34px
+			background-color: transparent
+			margin: 0
+			color: #fff
+			position: relative 
+			z-index: 1
+			border: none
+			font-size: 18px
+			font-family: 'Cabin'
+			border-bottom: 2px solid #fff
+			text-align: center
+			&[type="submit"]
+				border: none	
+				font-size: 18px 
+				border-radius: 8px
+				font-weight: bold
+				margin-bottom: 15px
+				height: 45px
+				text-transform: uppercase
+				color: #181d22 
+				background-color: $green-main
+		a#logo
+			position: absolute
+			top: -30px		
+			left: 50%
+			margin-left: -35px
+		h1 
+			text-align: center
+			padding: 25px 0	0
+			margin-bottom: 0
+			a 
+				margin: 0 auto	
 	#logo
 		display: block
 		border-radius: 50%
@@ -55,6 +130,9 @@ header
 		text-transform: uppercase
 		font-size: 22px
 		line-height: 22px
+		i 
+			font-style: normal
+			text-transform: lowercase
 		a 
 			line-height: 14px
 			font-size: 12px
@@ -69,3 +147,5 @@ header
 	padding-top: 40px
 	box-shadow: $shadow
 	border-radius: 0 0 10px 10px 		
+
+
