@@ -1,6 +1,7 @@
 body {
   background: #eee;
   margin: 0;
+  overflow-y: scroll;
   padding: 0;
   font-family: "Cabin",sans-serif,Helvetica,Arial !important; }
 
@@ -57,6 +58,15 @@ body {
   .ttl h2 {
     margin: 0;
     font-size: 28px; }
+
+.ololo-appear {
+  opacity: 0; }
+
+.ololo-appear.ololo-appear-active {
+  opacity: 1;
+  -webkit-transition: all 0.5s ease 0.5s;
+  -moz-transition: all 0.5s ease 0.5s;
+  transition: all 0.5s ease 0.5s; }
 
 @media screen and (max-width: 992px) {
   .ttl {

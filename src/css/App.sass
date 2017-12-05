@@ -9,70 +9,22 @@ header
 	box-shadow: $shadow
 	position: relative
 	z-index: 90
+	width: 100%
+	+transition(top 0.3s ease, margin 0.3s ease, width 0.5s ease 0.5s, border-radius 0.3s ease 0.5s)
+	&.entered
+		top: 0
+		margin: 0 auto
+		border-radius: 0
 	&.notenter
 		display: block
 		top: 50px
 		width: 400px 
 		margin: 0 auto 0
 		border-radius: 15px
-		button.active
-			text-decoration: underline
 		.col-sm-5,
-		.col-sm-7
+		.btns
 			width: 100% 
 			text-align: center
-		.col-sm-7
-			margin-bottom: 10px	
-		form 
-			background-color: transparent
-			padding: 0 15px
-			// border-radius: 0 0 15px 15px 
-			overflow: hidden
-		.valid-wrp
-			position: relative
-			margin: 10px 0 15px	
-			&.has-error
-				&:after 
-					background-color: $invalid-color
-					width: 100%
-			&:after 
-				position: absolute
-				height: 2px 
-				background-color: $blue-main 
-				width: 0 
-				content: ''
-				bottom: 0px 
-				left: 50% 
-				z-index: 22
-				+transition(all 0.3s ease)
-				@include transform(translateX(-50%))
-			&.active
-				&:after 
-					width: 100%	
-		input 
-			display: block
-			width: 100%
-			height: 34px
-			background-color: transparent
-			margin: 0
-			color: #fff
-			position: relative 
-			z-index: 1
-			border: none
-			font-size: 18px
-			font-family: 'Cabin'
-			border-bottom: 2px solid #fff
-			text-align: center
-			&[type="submit"]
-				border: none	
-				font-size: 18px 
-				border-radius: 8px
-				font-weight: bold
-				margin-bottom: 15px
-				height: 45px
-				text-transform: uppercase
-				color: #181d22 
-				background-color: $green-main
 		a#logo
 			position: absolute
 			top: -30px		
@@ -84,6 +36,188 @@ header
 			margin-bottom: 0
 			a 
 				margin: 0 auto	
+	.btns
+		padding-left: 0
+		text-align: center
+		padding-right: 0 
+		position: relative 
+		+transition(all 0.3s ease)
+		height: 65px
+		button 
+			overflow: hidden
+			position: absolute 
+			top: 0
+			left: 50%
+			+transition(all 0.3s ease)
+			&:before 
+				position: absolute
+				height: 100%
+				width: 25px 
+				background-position: center 
+				background-repeat: no-repeat
+				background-size: 15px
+				content: ''
+				top: 0
+				outline: 0
+				visibility: hidden
+				+transition(all 0.3s ease)
+		.blue-btn	
+			@include transform(translateX(5%))
+			z-index: 2
+			&:before 
+				background-image: url(../img/next.svg)
+				right: 15px 
+		.green-btn	
+			@include transform(translateX(-105%))
+			z-index: 2
+			&:before 
+				background-image: url(../img/back.svg)
+				left: 15px
+		.active 
+			pointer-events: none
+			background: transparent
+			@include transform(translateX(-50%))
+			font-size: 22px
+			border-radius: 0
+			top: 15px
+			&:before 
+				opacity: 0 
+				visibility: hidden
+		&.in
+			.blue-btn:before 
+				right: 0
+				opacity: 1 
+				visibility: visible
+				+transition(all 0.3s ease 0.2s)
+			.blue-btn
+				left: auto
+				right: -10px
+				padding: 8px 10px
+				@include transform(translateX(0%))
+				padding-right: 25px
+				top: -10px
+		&.up 
+			.green-btn:before 
+				left: 0
+				opacity: 1 
+				visibility: visible
+				+transition(all 0.3s ease 0.2s)
+			.green-btn
+				@include transform(translateX(0%))
+				left: -10px
+				padding: 8px 10px
+				padding-left: 25px
+				top: -10px
+	.ReactCollapse--content
+		padding: 10px 0			
+	form 
+		background-color: transparent
+		padding: 0 15px 
+		// border-radius: 0 0 15px 15px 
+		// overflow: hidden
+	.info
+		position: absolute 
+		right: 0
+		top: 5px 
+		z-index: 6
+		opacity: 0
+		visibility: hidden
+		&:hover 
+			div 
+				opacity: 1
+				visibility: visible
+				@include transform(rotateY(0deg))
+		.alert-ico
+			display: block 
+			width: 20px 
+			height: 20px 
+			border-radius: 50%
+			background-color: $invalid-color
+			background-image: url(../img/info.svg)
+			background-position: center 
+			background-repeat: no-repeat
+			background-size: 10px
+		div 
+			position: absolute
+			width: 200px
+			// opacity: 0
+			// visibility: hidden
+			background-color: $invalid-color	
+			top: 0
+			margin: 0 0 0 10px
+			transform-origin: 0 0
+			padding: 10px 
+			left: 100%
+			+transition(all 0.3s ease)
+			@include transform(rotateY(90deg))
+			&:before 
+				position: absolute 
+				top: 0
+				left: -10px 
+				content: ''
+				width: 0
+				height: 0
+				border-style: solid
+				border-width: 0 10px 10px 0
+				border-color: transparent $invalid-color transparent transparent			
+			ul 
+				padding-left: 20px
+	.valid-wrp
+		position: relative
+		margin: 10px auto 15px	
+		&.valid
+			&:after 
+				background-color: $green-main
+				width: 100%			
+		&.has-error
+			.info 
+				opacity: 1
+				visibility: visible
+			&:after 
+				background-color: $invalid-color
+				width: 100%
+		&:after 
+			position: absolute
+			height: 2px 
+			background-color: $blue-main 
+			width: 0 
+			content: ''
+			bottom: 0px 
+			left: 50% 
+			z-index: 22
+			+transition(all 0.3s ease)
+			@include transform(translateX(-50%))
+		&.active
+			&:after 
+				width: 100%	
+	input 
+		display: block
+		width: 100%
+		height: 34px
+		background-color: transparent
+		margin: 0
+		color: #fff
+		position: relative 
+		z-index: 1
+		border: none
+		font-size: 18px
+		font-family: 'Cabin'
+		border-bottom: 2px solid #fff
+		text-align: center
+		&[type="submit"]
+			border: none	
+			font-size: 18px 
+			border-radius: 8px
+			font-weight: bold
+			// margin-bottom: 15px
+			height: 45px
+			text-transform: uppercase
+			color: #181d22 
+			background-color: $green-main
+			+transition(all 0.3s ease)
+			&:hover 
+				background-color: $purple-main
+				color: #fff
 	#logo
 		display: block
 		border-radius: 50%
@@ -148,4 +282,14 @@ header
 	box-shadow: $shadow
 	border-radius: 0 0 10px 10px 		
 
+.example-appear
+	opacity: 0.01
+	width: 0
+	margin: 0 auto
+	display: block
+
+.example-appear.example-appear-active
+	opacity: 1
+	width: 100%
+	transition: all .3s ease-in 
 

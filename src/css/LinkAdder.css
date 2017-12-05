@@ -71,7 +71,7 @@
         background-repeat: no-repeat; }
   #add-wrp .alert {
     position: absolute;
-    background-color: #E85906;
+    background-color: #ff4040;
     color: #fff;
     padding: 5px 10px;
     top: 100%;
@@ -99,7 +99,7 @@
       height: 0;
       border-style: solid;
       border-width: 5px 0 0 5px;
-      border-color: transparent transparent transparent #E85906; }
+      border-color: transparent transparent transparent #ff4040; }
     #add-wrp .alert small {
       display: block; }
   #add-wrp .green-btn {
@@ -177,7 +177,7 @@
       transform: rotateY(0deg); }
     #add-wrp .valid-wrp.hasError:after {
       width: 100%;
-      background-color: #E85906; }
+      background-color: #ff4040; }
     #add-wrp .valid-wrp:after {
       position: absolute;
       content: '';

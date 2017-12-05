@@ -8,6 +8,7 @@
 body
 	background: $body-bg
 	margin: 0
+	overflow-y: scroll
 	padding: 0
 	font-family: "Cabin",sans-serif,Helvetica,Arial !important
 *
@@ -43,15 +44,20 @@ body
 		font-family: Cabin
 		margin: 15px 5px 5px
 .blue-btn._main:hover
-	background-color: #3f51b5
+	background-color: $purple-main
 .green-btn._main:hover
-	background-color: #3f51b5
+	background-color: $purple-main
 .ttl
 	padding: 40px 15px 10px
 	h2 
 		margin: 0
 		font-size: 28px
 
+.ololo-appear
+	opacity: 0
+.ololo-appear.ololo-appear-active
+	opacity: 1
+	+transition(all 0.5s ease 0.5s)	
 
 @media screen and (max-width: 992px)
 	
