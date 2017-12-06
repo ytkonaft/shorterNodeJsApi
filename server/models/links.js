@@ -6,7 +6,6 @@ exports.all = function(callback){
 		.find().toArray((err,docs)=>callback(err,docs));
 }
 exports.findById = function(id,callback){
-	console.log(id);
 		db.get().collection('links')
 			.findOne({'_id': ObjectID(id)},
 							(err,doc) => callback(err,doc));

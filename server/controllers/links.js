@@ -13,17 +13,16 @@ exports.all = function(req,res){
 
 exports.findById = function(req,res){
 	Links.findById(req.params.id, 
-									function(err,doc){
-										if(err){
-											console.log(err);
-											return res.sendStatus(500);
-										}
-										res.send(doc);				
-									})
+					function(err,doc){
+						if(err){
+							console.log(err);
+							return res.sendStatus(500);
+						}
+						res.send(doc);				
+					})
 	}
 
 exports.create = function(req,res){
-	console.log(req.body)
 	var newLink ={
 			name: req.body.name,
 			urlShort: req.body.urlShort,
@@ -57,11 +56,11 @@ exports.update = function(req,res){
 
 exports.delete = function(req,res){
 	Links.delete(req.params.id,
-								function(err,result){
-									if(err){
-										console.log(err);
-										return res.sendStatus(500);
-									}
-									return res.sendStatus(200);
-								})
+					function(err,result){
+						if(err){
+							console.log(err);
+							return res.sendStatus(500);
+						}
+						return res.sendStatus(200);
+					})
 }

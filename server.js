@@ -6,23 +6,25 @@ var express = require('express'),
 		ObjectID = require('mongodb').ObjectID,
 		db = require('./server/db.js'),
 		LinksController = require('./server/controllers/links'),
+		UsersController = require('./server/controllers/users'),
 		app = express();
 
 
 		app.use(bodyParser.json());
 		app.use(bodyParser.urlencoded({extended:true}));
-		app.use(cors({origin: '*'})); 
+		app.use(cors({origin: '*'}));
 
+	app.post('/signup/', UsersController.create);
 
-	app.get('/all/', LinksController.all)
+	app.get('/all/', LinksController.all);
 
-	app.get('/find/:id', LinksController.findById)
+	app.get('/find/:id', LinksController.findById);
 
-	app.post('/add/', LinksController.create)
+	app.post('/add/', LinksController.create);
 
-	app.put('/update/:id', LinksController.update)
+	app.put('/update/:id', LinksController.update);
 
-	app.delete('/delete/:id', LinksController.delete)
+	app.delete('/delete/:id', LinksController.delete);
 
 
 
