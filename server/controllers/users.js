@@ -11,20 +11,29 @@ exports.create = function(req,res){
 			mail: req.body.mail,
 			pass: hashPass
 		};	
+
 	Users.checkEmail(req.body.mail)
-		.then((res)=>{
-			if(!!res){
-				return res.sendStatus(422);
+		.then((response)=>{
+				if(!!response) throw 111;
+			})
+		.then(()=>{
+				Users.create(newUser,	
+					function(err,result){
+						if(err){
+							return res.sendStatus(500);
+							throw 222;
+						}
+						res.send(newUser);
+				})					
+			})
+		.catch((err)=>{
+			switch(err){
+				case 111: 
+					res.sendStatus(422);
+					break;
+				case 222: 
+					res.sendStatus(500);
+					break;
 			}
-		},(err)=>console.log(err));
-
-
-
-	// Users.create(newUser,	
-	// 	function(err,result){
-	// 		if(err){
-	// 			return res.sendStatus(500);
-	// 		}
-	// 		res.send(newUser);
-	// })		
+		})
 }
