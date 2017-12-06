@@ -181,9 +181,7 @@ class SignForm extends Component {
 										onBlur={this.handleBlur}/>
 									<div className="info">
 										<i className="alert-ico"/>
-										<div>
-											Passwords Don't Match or is not valid
-										</div>
+										<div>Passwords Don`t Match or is not valid</div>
 									</div>									
 								</div>  
 	

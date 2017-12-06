@@ -78,8 +78,11 @@ header
 			background: transparent
 			@include transform(translateX(-50%))
 			font-size: 22px
-			border-radius: 0
+			// border-radius: 0
 			top: 15px
+			border-radius: 25px
+			&:after 
+				background-color: transparent
 			&:before 
 				opacity: 0 
 				visibility: hidden
@@ -117,7 +120,7 @@ header
 		// overflow: hidden
 	.info
 		position: absolute 
-		right: 0
+		right: 0px
 		top: 5px 
 		z-index: 6
 		opacity: 0
@@ -143,8 +146,8 @@ header
 			// opacity: 0
 			// visibility: hidden
 			background-color: $invalid-color	
-			top: 0
-			margin: 0 0 0 10px
+			top: 7px
+			margin: 0 0 0 15px
 			transform-origin: 0 0
 			padding: 10px 
 			left: 100%
