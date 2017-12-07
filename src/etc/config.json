@@ -2,7 +2,7 @@
     "apiPrefix": "http://localhost:3000",
     "serverPort": "3000",
     "db":{
-        "name": "shortshit",
+        "name": "azaza",
         "host": "localhost",
         "port": 27017
     }

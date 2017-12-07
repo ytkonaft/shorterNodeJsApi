@@ -14,7 +14,7 @@ exports.create = function(req,res){
 
 	Users.checkEmail(req.body.mail)
 		.then((response)=>{
-				if(!!response) throw 111;
+				if(!!response) throw 'EMAIL_IS_EXIST';
 			})
 		.then(()=>{
 				Users.create(newUser,	
@@ -28,7 +28,7 @@ exports.create = function(req,res){
 			})
 		.catch((err)=>{
 			switch(err){
-				case 111: 
+				case 'EMAIL_IS_EXIST': 
 					res.sendStatus(422);
 					break;
 				case 222: 
@@ -39,19 +39,24 @@ exports.create = function(req,res){
 }
 exports.login = function(req,res){
 	if(!req.body.mail && !req.body.pass) return res.sendStatus(422);
+	if(!req.body.mail ) return res.sendStatus(420);
+	if(!req.body.pass) return res.sendStatus(421);
 
 	Users.checkEmail(req.body.mail)
-		.then((response)=>{
-				if(response && response.pass === sha1(req.body.pass)){
-					res.send(response._id);
+		.then(resolve=>	{
+			if(!resolve){
+				res.sendStatus(404)
+				throw 404;
+			}else{
+				if(resolve.pass === sha1(req.body.pass)){
+					res.send(resolve._id);
 				}else{
-					res.sendStatus(401);
-					throw 401;
+					res.sendStatus(401)
+					throw 401;					
 				}
-			},(rej)=>{
-					res.sendStatus(404);
-					throw 404;				
-			})
+			}
+		},
+		reject=> console.log(reject))
 		.catch((err)=>console.log(err));	
 
 }

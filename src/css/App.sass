@@ -296,3 +296,34 @@ header
 	width: 100%
 	transition: all .3s ease-in 
 
+.alert
+	display: block
+	width: 320px
+	margin: 0 auto 
+	text-align: center
+	padding: 5px 10px 
+	position: relative
+	top: 10px
+	border-radius: 3px
+	+transition(all 0.3s ease)
+	&.error
+		background-color: $invalid-color
+		color: #fff
+	&.success
+		color: $dark-main	
+		background-color: $green-main
+	p 
+		margin: 0 auto
+	button
+		position: absolute
+		width: 20px 
+		height: 20px 
+		background-color: #fff 
+		top: -10px 
+		right: -5px
+		border-radius: 50% 
+		border: none		
+		background-image: url(../img/delete.svg)
+		background-position: center center 
+		background-repeat: no-repeat 
+		background-size: 10px

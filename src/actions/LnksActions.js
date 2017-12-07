@@ -10,7 +10,6 @@ const LnkActions = {
             type: Constants.LOAD_LNKS_REQUEST
         });
 
-        console.log(userId);
         api.listLnks(userId)
         .then(({ data }) =>
             AppDispatcher.dispatch({

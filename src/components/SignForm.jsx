@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import {UnmountClosed} from 'react-collapse';
+import Notification from './Notification.jsx';
 import axios from 'axios';
 import { apiPrefix } from '../etc/config.json';
 
@@ -16,19 +17,19 @@ class SignForm extends Component {
 			showAuth: false,
 			email: '',
 			pswrd: '',
-			confPswrd: ''
-
+			confPswrd: '',
+			showAlert: false,
+			alertText: '',
+			alertType: ''
 	}
 	this.handleSign = this.handleSign.bind(this);  
-	this.handleAuthOpen = this.handleAuthOpen.bind(this);  
 	this.signUp = this.signUp.bind(this);  
 	this.signIn = this.signIn.bind(this);  
 	this.handleEmail = this.handleEmail.bind(this);  
 	this.handlePswrd = this.handlePswrd.bind(this);  
 	this.handePswrdConfirm = this.handePswrdConfirm.bind(this);  
-	// this.checkValid = this.checkValid.bind(this);  
 	this.handleBlur = this.handleBlur.bind(this);  
-
+	this.handleCloseAlert = this.handleCloseAlert.bind(this);  
 	}
 	handleSign(e){
 		e.preventDefault();
@@ -40,21 +41,46 @@ class SignForm extends Component {
   		if(this.state.enterMode==='up'){
     		axios.post(`${apiPrefix}/signup/`, User)
 			.then(function (response) {
-				this.setState({enterMode:'in'});
-			  console.log(response);
+				that.setState({alertText:'Registration completed successfully, you can to sign in',
+								alertType: 'success',
+								showAlert: true
+
+				});
+				that.setState({enterMode:'in'});
+				that.resetForm('in');
 			})
 			.catch(function (error) {
-			  console.log(error);
+			  switch(error.response.status){
+			  	case 422: 
+			  		that.setState({alertText:'This email is exist'});
+			  		break;
+			  }
+			  that.setState({alertType: 'error',showAlert: true})
 			});			
   		}else{
   			axios.post(`${apiPrefix}/signin/`, User)
 			.then(function (response) {
-			  console.log(response);
 				that.props.submited(response);
-
 			})
 			.catch(function (error) {
-			  console.log(error);
+			  switch(error.response.status){
+			  	case 420: 
+			  		that.setState({alertText:'Please enter email'});
+			  		break;
+			  	case 421: 
+			  		that.setState({alertText:'Please, enter the password'}); 
+			  		break;
+			  	case 404: 
+			  		that.setState({alertText:'This email is not found'}); 
+			  		break;
+			  	case 401: 
+			  		that.setState({alertText:'The password is not correct'}); 
+			  		break;		
+			  	case 422: 
+			  		that.setState({alertText:'Please, fill the form'}); 
+			  		break;					  		
+			  }
+			  that.setState({alertType: 'error',showAlert: true})
 			});  			
   		}
 	}
@@ -82,21 +108,12 @@ class SignForm extends Component {
 	  	}
 	}
 	signIn(e){
-	  this.handleAuthOpen('in', e.target);
 	  this.resetForm('in');
 	}
 	signUp(e){
-	  this.handleAuthOpen('up', e.target)
   		this.resetForm('up')
 	}  
-	handleAuthOpen(mode,elm){
 
-	  (elm.previousElementSibling ||elm.nextElementSibling).classList.remove('active');
-	  elm.parentNode.classList.remove('in','up');
-	  elm.parentNode.classList.add(mode);
-	  elm.classList.add('active')
-
-	}
 	validator(elm,type){
 		switch (type) {
 		  case 'email':
@@ -146,13 +163,27 @@ class SignForm extends Component {
 			e.target.parentNode.classList.add('has-error')
 		}
 	}
+	handleCloseAlert(e){
+		this.setState({showAlert: false})
+	}
 	render() {
 		return (
 		<div>
-				<div className="btns">
-				  <button className="green-btn _main" onClick={this.signIn}>Sign in</button>
-				  <button className="blue-btn _main" onClick={this.signUp}>Sign up</button>
+				<div className={"btns "+this.state.enterMode}>
+				  <button className={"green-btn _main "+ (this.state.enterMode ==='in'?'active':'') }
+				  			onClick={this.signIn}>Sign in</button>
+				  <button className={"blue-btn _main "+ (this.state.enterMode ==='up'?'active':'') }
+				  			onClick={this.signUp}>Sign up</button>
 				</div>
+			<div className="allert-wrp">
+				<UnmountClosed isOpened={this.state.showAlert} >	
+					<div className="ReactCollapse--content">
+				 	<Notification alertText={this.state.alertText}
+									alertClose={this.handleCloseAlert}
+									alertType={this.state.alertType}/>
+					</div>								
+				</UnmountClosed >
+			</div>	
 			<UnmountClosed isOpened={this.state.showAuth} >	
 				<div className="ReactCollapse--content">
 					<form id="enterForm">

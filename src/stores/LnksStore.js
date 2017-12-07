@@ -45,7 +45,6 @@ AppDispatcher.register(function(action) {
     switch(action.type) {
         case AppConstants.LOAD_LNKS_REQUEST: {
             _isLoading = true;
-
             LnkStore.emitChange();
             break;
         }
@@ -61,7 +60,6 @@ AppDispatcher.register(function(action) {
 
         case AppConstants.LOAD_LNKS_FAIL: {
             _loadingError = action.error;
-
             LnkStore.emitChange();
             break;
         }

@@ -2,8 +2,7 @@ var Links = require('../models/links');
 
 
 exports.all = function(req,res){
-	console.log(req.body, req.params);
-	Links.all(req.params.user, function(err,docs){
+	Links.all(req.params.id, function(err,docs){
 		if(err){
 			console.log(err);
 			return res.sendStatus(500);

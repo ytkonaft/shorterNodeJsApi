@@ -129,7 +129,6 @@ class LinkAdder extends Component {
   		hasEror: false,
       copied: false
   	});
-     console.log(this.state);
     let imgWrp = document.getElementById('link-img');
         imgWrp.innerHTML = '';
         imgWrp.classList.remove('has-img');
