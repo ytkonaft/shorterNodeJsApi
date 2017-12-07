@@ -14,7 +14,8 @@ function formatLnk(lnk) {
         id: lnk._id,
         name: lnk.name,
         urlShort: lnk.urlShort,
-        longUrl: lnk.longUrl
+        longUrl: lnk.longUrl,
+        user: lnk.user
     };
 }
 

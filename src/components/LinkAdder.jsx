@@ -57,7 +57,6 @@ class LinkAdder extends Component {
   			imgWrp.appendChild(favIcon);
   			imgWrp.classList.add('has-img');
   this.createShortUrl(elm.value);
-  console.log(this.createShortUrl(elm.value));
   this.setState({valid: true})
   this.setState({name:this.getName(elm.value)});
   }
@@ -118,7 +117,8 @@ class LinkAdder extends Component {
   	const newLnk = {
   		name: this.state.name,
 			longUrl: this.state.longUrl,
-			urlShort: this.state.urlShort
+			urlShort: this.state.urlShort,
+      user: this.props.userId
   	}
   	this.props.onLinkAdd(newLnk);
   	this.setState({
@@ -129,6 +129,7 @@ class LinkAdder extends Component {
   		hasEror: false,
       copied: false
   	});
+     console.log(this.state);
     let imgWrp = document.getElementById('link-img');
         imgWrp.innerHTML = '';
         imgWrp.classList.remove('has-img');
@@ -145,8 +146,7 @@ class LinkAdder extends Component {
 	    								placeholder="Enter URL here"  
 	    								value={this.state.longUrl} 
 	    								onChange={this.handleLinkChange}  
-	    								onFocus={this.checkFocus}
-	    								onBlur={this.checkBlur}/>
+	    								onFocus={this.checkFocus}/>
 	    				<div className="alert">Please check your url
 	    					<small>protocols <b> http://</b> and <b> https://</b> are mandatory</small>
 	    				</div>				
@@ -155,6 +155,7 @@ class LinkAdder extends Component {
     			<div className="col-md-3">
             <div className="copy-wrp">
     				  <input type="text" 
+                      id="urlOutput" 
     				  				className="shortUrl" 
     				  				readOnly="true" 
     				  				placeholder="Short URL will be here" 
@@ -162,10 +163,7 @@ class LinkAdder extends Component {
 
                   <CopyToClipboard text={this.state.urlShort}
                                     onCopy={() => this.setState({copied: true})}>
-                      <button className={
-                              this.state.valid ? 'up' : 'down'
-                              // this.state.copied ? 'copied' : null
-                      }/>
+                      <button className={this.state.valid ? 'up' : 'down'}/>
                   </CopyToClipboard>
  
             </div>        
@@ -178,7 +176,7 @@ class LinkAdder extends Component {
                     value={this.state.name}/>
     			</div>
     			<div className="col-md-1">
-    				<button className="green-btn" onClick={this.handleLinkAdd}></button>
+    				<button className="green-btn" disabled={!this.state.valid} onClick={this.handleLinkAdd}></button>
     			</div>    			
     		</div>
     	)

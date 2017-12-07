@@ -16,7 +16,9 @@ var express = require('express'),
 
 	app.post('/signup/', UsersController.create);
 
-	app.get('/all/', LinksController.all);
+	app.post('/signin/', UsersController.login);
+
+	app.get('/all/:id', LinksController.all);
 
 	app.get('/find/:id', LinksController.findById);
 

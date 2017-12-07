@@ -5,12 +5,13 @@ import Constants from '../constants/AppConstants';
 import api from '../api/api';
 
 const LnkActions = {
-    loadLnks() {
+    loadLnks(userId) {
         AppDispatcher.dispatch({
             type: Constants.LOAD_LNKS_REQUEST
         });
 
-        api.listLnks()
+        console.log(userId);
+        api.listLnks(userId)
         .then(({ data }) =>
             AppDispatcher.dispatch({
                 type: Constants.LOAD_LNKS_SUCCESS,
@@ -28,17 +29,17 @@ const LnkActions = {
     createLnks(lnk) {
         api.createLnk(lnk)
         .then(() =>
-            this.loadLnks()
+            this.loadLnks(lnk.user)
         )
         .catch(err =>
             console.error(err)
         );
     },
 
-    deleteLnk(lnkId) {
+    deleteLnk(userId,lnkId) {
         api.deleteLnk(lnkId)
         .then(() =>
-            this.loadLnks()
+            this.loadLnks(userId)
         )
         .catch(err =>
             console.error(err)

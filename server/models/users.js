@@ -13,3 +13,8 @@ exports.checkEmail = function(email,callback){
 			.findOne({'mail': email});
 			return answ;
 }
+// exports.login = function(newUser,callback){
+// 		db.get().collection('users')
+// 			.insert(newUser,
+// 							(err,result)=>callback(err,result))
+// }

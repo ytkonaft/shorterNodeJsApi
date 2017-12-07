@@ -10,7 +10,6 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 
 function getFluxState(){
-  console.log(LnksStore.getLnks());
   return{
     isLoading: LnksStore.isLoading(),
     lnks: LnksStore.getLnks()
@@ -44,12 +43,13 @@ class App extends Component {
   handleLinkAdd(data){
     LnksActions.createLnks(data); 
   }
-  handleLinkDelete(id){
-    LnksActions.deleteLnk(id); 
+  handleLinkDelete(UsrId,Lnkid){
+    LnksActions.deleteLnk(UsrId,Lnkid); 
   }
   logInComplete(res){
     this.setState({isLogined : true})
-    LnksActions.loadLnks(); 
+    this.setState({user: res.data});
+    LnksActions.loadLnks(res.data); 
 
   }
   render() {
@@ -75,7 +75,7 @@ class App extends Component {
             transitionEnter={true}
             transitionLeave={false}>
           <div id="content" className="container">
-            <LinkAdder onLinkAdd={this.handleLinkAdd}/>
+            <LinkAdder onLinkAdd={this.handleLinkAdd} userId={this.state.user}/>
             <LinksGrid lnks={this.state.lnks} onLnkDelete={this.handleLinkDelete}/>
           </div>
         </ReactCSSTransitionGroup>

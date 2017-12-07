@@ -37,3 +37,21 @@ exports.create = function(req,res){
 			}
 		})
 }
+exports.login = function(req,res){
+	if(!req.body.mail && !req.body.pass) return res.sendStatus(422);
+
+	Users.checkEmail(req.body.mail)
+		.then((response)=>{
+				if(response && response.pass === sha1(req.body.pass)){
+					res.send(response._id);
+				}else{
+					res.sendStatus(401);
+					throw 401;
+				}
+			},(rej)=>{
+					res.sendStatus(404);
+					throw 404;				
+			})
+		.catch((err)=>console.log(err));	
+
+}

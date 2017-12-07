@@ -1,9 +1,9 @@
 var ObjectID = require('mongodb').ObjectID,
 		db = require('../db.js');
 
-exports.all = function(callback){
+exports.all = function(id,callback){
 	db.get().collection('links')
-		.find().toArray((err,docs)=>callback(err,docs));
+		.find({'user': id}).toArray((err,docs)=>callback(err,docs));
 }
 exports.findById = function(id,callback){
 		db.get().collection('links')
@@ -21,8 +21,11 @@ exports.update = function(id,newData,callback){
 											newData,
 											(err,result)=>callback(err,result));
 }
-exports.delete = function(id, callback){
+exports.delete = function(user, id, callback){
 					db.get().collection('links')
-						.deleteOne({ '_id': ObjectID(id)},
+						.deleteOne({ 
+							'user': user,
+							'_id': ObjectID(id)
+							},
 							(err,result)=>callback(err,result));
 }

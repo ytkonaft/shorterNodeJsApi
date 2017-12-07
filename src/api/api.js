@@ -1,10 +1,10 @@
 import axios from 'axios';
 
 import { apiPrefix } from '../etc/config.json';
-
+ 
 export default {
-    listLnks() {
-        return axios.get(`${apiPrefix}/all/`);
+    listLnks(usrId) {
+        return axios.get(`${apiPrefix}/all/${usrId}`);
     },
     createLnk(data) {
         return axios.post(`${apiPrefix}/add/`, data);

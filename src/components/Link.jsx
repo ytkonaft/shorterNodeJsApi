@@ -7,7 +7,7 @@ constructor(props) {
     this.removeIt= this.removeIt.bind(this);
 }
   removeIt(){
-    this.props.onLinkRemove(this.props.id);
+    this.props.onLinkRemove(this.props.user,this.props.id);
   }
   render() {
     return (

@@ -6,14 +6,13 @@ constructor(props) {
     super(props);
     this.handleLinkDelete= this.handleLinkDelete.bind(this);
 }    
-  handleLinkDelete(id){
-    this.props.onLnkDelete(id);
-    // console.log(id)
+  handleLinkDelete(usr,id){
+    this.props.onLnkDelete(usr,id);
   }
   render() {
     return (
     	<div>
-    		<div className="ttl"><h2>Your links</h2></div>
+    		<div className="ttl"><h2>Your links {this.props.lnks.length<1? 'will be here': ''}</h2></div>
     		<div id="linksGrid" className="row">
                 {
                     this.props.lnks.reverse().map(lnk =>

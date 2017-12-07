@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import {UnmountClosed} from 'react-collapse';
+import axios from 'axios';
+import { apiPrefix } from '../etc/config.json';
+
 var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
 	rePass = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/,
 	validTimer;
+
 class SignForm extends Component { 
 	constructor(props) {
 		super(props);
@@ -15,7 +19,7 @@ class SignForm extends Component {
 			confPswrd: ''
 
 	}
-	this.handleSubmit = this.handleSubmit.bind(this);  
+	this.handleSign = this.handleSign.bind(this);  
 	this.handleAuthOpen = this.handleAuthOpen.bind(this);  
 	this.signUp = this.signUp.bind(this);  
 	this.signIn = this.signIn.bind(this);  
@@ -26,13 +30,36 @@ class SignForm extends Component {
 	this.handleBlur = this.handleBlur.bind(this);  
 
 	}
-	handleSubmit(e){
+	handleSign(e){
 		e.preventDefault();
-		this.props.submited(false);
-		 
-	}
-	handletest(e){
+  		const User = {
+  			mail: this.state.email,
+			pass: this.state.pswrd,
+  		}		
+  		const that = this;
+  		if(this.state.enterMode==='up'){
+    		axios.post(`${apiPrefix}/signup/`, User)
+			.then(function (response) {
+				this.setState({enterMode:'in'});
+			  console.log(response);
+			})
+			.catch(function (error) {
+			  console.log(error);
+			});			
+  		}else{
+  			axios.post(`${apiPrefix}/signin/`, User)
+			.then(function (response) {
+			  console.log(response);
+				that.props.submited(response);
 
+			})
+			.catch(function (error) {
+			  console.log(error);
+			});  			
+  		}
+	}
+
+	handletest(e){
 		e.target.parentNode.classList.toggle('active')
 		if(e.target.value === ''){
 			e.target.parentElement.classList.remove('has-error', 'valid')
@@ -87,7 +114,6 @@ class SignForm extends Component {
 		let that = this,
 			prnt = elm.parentNode;
 		clearTimeout(validTimer);
-		console.log()
 		prnt.classList.remove('has-error','valid')
 		if(elm.value === '') return
 		if(!this.validator(elm,type)){
@@ -188,7 +214,9 @@ class SignForm extends Component {
 							</ReactCSSTransitionGroup>
 						):('')}
 	
-					  <input type="submit" onClick={this.handleSubmit} value={'Sign '+this.state.enterMode}/>
+					  <input type="submit" 
+					  		onClick={this.handleSign} 
+					  		value={'Sign '+this.state.enterMode}/>
 					 </form>
 				 </div> 
 			</UnmountClosed >
