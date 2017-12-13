@@ -77,7 +77,7 @@ class App extends Component {
             transitionName="ololo"
             transitionAppear={true}
             transitionAppearTimeout={500}
-            transitionEnter={true}
+            transitionEnter={false}
             transitionLeave={false}>
           <div id="content" className="container">
             <LinkAdder onLinkAdd={this.handleLinkAdd} userId={this.state.user}/>
