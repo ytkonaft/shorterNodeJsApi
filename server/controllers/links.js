@@ -56,7 +56,6 @@ exports.update = function(req,res){
 }
 
 exports.delete = function(req,res){
-	console.log(req.body);
 	Links.delete(req.body.user,req.body.id,
 					function(err,result){
 						if(err){

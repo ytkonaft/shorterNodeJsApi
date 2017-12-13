@@ -18,7 +18,7 @@ class SignForm extends Component {
 			email: '',
 			pswrd: '',
 			confPswrd: '',
-			authError: false,
+			authHasError: false,
 			showAlert: false,
 			alertText: '',
 			alertType: ''
@@ -37,7 +37,10 @@ class SignForm extends Component {
 	}
 	handleSign(e){
 		e.preventDefault();
-		if(this.checkAfterClick()) return
+		if(!this.checkAfterClick()){
+			console.log(this.checkAfterClick());
+			return false;
+		}
   		const User = {
   			mail: this.state.email,
 			pass: this.state.pswrd,
@@ -60,7 +63,7 @@ class SignForm extends Component {
 			  		that.setState({alertText:'This email is exist'});
 			  		break;
 			  }
-			  that.setState({alertType: 'error',showAlert: true})
+			  that.setState({alertType: 'error',showAlert: true, authHasError: true})
 			});			
   		}else{
   			axios.post(`${apiPrefix}/signin/`, User)
@@ -87,7 +90,7 @@ class SignForm extends Component {
 			  }
 			  that.setState({alertType: 'error',
 			  				showAlert: true,
-			  				authError: true});
+			  				authHasError: true});
 			  that.props.authError();
 			});  			
   		}
@@ -122,20 +125,21 @@ class SignForm extends Component {
   		this.resetForm('up')
 	}  
 	checkAfterClick(e){
+		// e.preventDefault()
 		let inputColection = document.querySelectorAll('#enterForm .valid-wrp input');
 		for(var i = 0; i < inputColection.length; i++ ){
-
-				console.log(!this.validator(inputColection[i], inputColection[i].name));
 			if( !this.validator(inputColection[i], inputColection[i].name)){
-				this.setState({authError: true});
+				this.setState({authHasError: true});
 				this.props.authError();
 				inputColection[i].parentNode.classList.remove('valid')
 				inputColection[i].parentNode.classList.add('has-error');
 			}else{
 				this.setState({authError: false});
 			}
+			console.log(this.validator(inputColection[i], inputColection[i].name));
 		}	
-		return	this.state.authError;
+		console.log('---',this.state.authHasError)
+		return	this.state.authHasError;
 	}
 	validator(elm,type){
 		switch (type) {
@@ -269,7 +273,10 @@ class SignForm extends Component {
 						):('')}
 	
 					  <input type="submit" 
-					  		onClick={this.handleSign} 
+					  		onClick={
+					  			this.handleSign
+					  		// this.checkAfterClick	
+					  		} 
 					  		value={'Sign '+this.state.enterMode}/>
 
 					 </form>
