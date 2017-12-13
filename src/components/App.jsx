@@ -43,14 +43,19 @@ class App extends Component {
   handleLinkAdd(data){
     LnksActions.createLnks(data); 
   }
-  handleLinkDelete(UsrId,Lnkid){
-    LnksActions.deleteLnk(UsrId,Lnkid); 
-  }
+
   logInComplete(res){
     this.setState({isLogined : true})
     this.setState({user: res.data});
     LnksActions.loadLnks(res.data); 
 
+  }
+  errorAuth(){
+    let header = document.getElementsByTagName('header')[0];
+    header.classList.add('wobble');
+    setTimeout(()=>{
+      header.classList.remove('wobble')
+    },1000)
   }
   render() {
     return (
@@ -62,7 +67,7 @@ class App extends Component {
               <h1 className="App-title">the cutter <a><i>by</i> ufo-engineering</a></h1>
             </div>
           </div>
-          {!this.state.isLogined? <SignForm submited={this.logInComplete}/>:''}
+          {!this.state.isLogined? <SignForm authError={this.errorAuth} submited={this.logInComplete}/>:''}
           
             
             
@@ -76,7 +81,7 @@ class App extends Component {
             transitionLeave={false}>
           <div id="content" className="container">
             <LinkAdder onLinkAdd={this.handleLinkAdd} userId={this.state.user}/>
-            <LinksGrid lnks={this.state.lnks} onLnkDelete={this.handleLinkDelete}/>
+            <LinksGrid lnks={this.state.lnks} />
           </div>
         </ReactCSSTransitionGroup>
     ):''}   

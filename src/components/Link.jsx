@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
+import LnksActions from '../actions/LnksActions';
 
 class Link extends Component {
 constructor(props) {
@@ -7,7 +8,8 @@ constructor(props) {
     this.removeIt= this.removeIt.bind(this);
 }
   removeIt(){
-    this.props.onLinkRemove(this.props.user,this.props.id);
+    console.log(this.props.user,this.props.id);
+    LnksActions.deleteLnk({"user":this.props.user, "id": this.props.id}); 
   }
   render() {
     return (

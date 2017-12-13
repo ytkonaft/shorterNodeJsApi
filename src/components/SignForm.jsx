@@ -18,6 +18,7 @@ class SignForm extends Component {
 			email: '',
 			pswrd: '',
 			confPswrd: '',
+			authError: false,
 			showAlert: false,
 			alertText: '',
 			alertType: ''
@@ -30,9 +31,13 @@ class SignForm extends Component {
 	this.handePswrdConfirm = this.handePswrdConfirm.bind(this);  
 	this.handleBlur = this.handleBlur.bind(this);  
 	this.handleCloseAlert = this.handleCloseAlert.bind(this);  
+	this.checkAfterClick = this.checkAfterClick.bind(this);  
+
+
 	}
 	handleSign(e){
 		e.preventDefault();
+		if(this.checkAfterClick()) return
   		const User = {
   			mail: this.state.email,
 			pass: this.state.pswrd,
@@ -80,7 +85,10 @@ class SignForm extends Component {
 			  		that.setState({alertText:'Please, fill the form'}); 
 			  		break;					  		
 			  }
-			  that.setState({alertType: 'error',showAlert: true})
+			  that.setState({alertType: 'error',
+			  				showAlert: true,
+			  				authError: true});
+			  that.props.authError();
 			});  			
   		}
 	}
@@ -113,7 +121,22 @@ class SignForm extends Component {
 	signUp(e){
   		this.resetForm('up')
 	}  
+	checkAfterClick(e){
+		let inputColection = document.querySelectorAll('#enterForm .valid-wrp input');
+		for(var i = 0; i < inputColection.length; i++ ){
 
+				console.log(!this.validator(inputColection[i], inputColection[i].name));
+			if( !this.validator(inputColection[i], inputColection[i].name)){
+				this.setState({authError: true});
+				this.props.authError();
+				inputColection[i].parentNode.classList.remove('valid')
+				inputColection[i].parentNode.classList.add('has-error');
+			}else{
+				this.setState({authError: false});
+			}
+		}	
+		return	this.state.authError;
+	}
 	validator(elm,type){
 		switch (type) {
 		  case 'email':
@@ -248,6 +271,7 @@ class SignForm extends Component {
 					  <input type="submit" 
 					  		onClick={this.handleSign} 
 					  		value={'Sign '+this.state.enterMode}/>
+
 					 </form>
 				 </div> 
 			</UnmountClosed >

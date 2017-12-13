@@ -4,11 +4,7 @@ import Link from './Link.jsx';
 class LinksGrid extends Component {
 constructor(props) {
     super(props);
-    this.handleLinkDelete= this.handleLinkDelete.bind(this);
 }    
-  handleLinkDelete(usr,id){
-    this.props.onLnkDelete(usr,id);
-  }
   render() {
     return (
     	<div>
@@ -22,7 +18,7 @@ constructor(props) {
                         name={lnk.name} 
                         urlShort= {lnk.urlShort}
                         longUrl= {lnk.longUrl}
-                        onLinkRemove = {this.handleLinkDelete}
+                        user= {lnk.user}
                     />
                     )
                 }

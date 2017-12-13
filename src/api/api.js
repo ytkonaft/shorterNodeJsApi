@@ -9,7 +9,7 @@ export default {
     createLnk(data) {
         return axios.post(`${apiPrefix}/add/`, data);
     },
-    deleteLnk(lnkId) {
-        return axios.delete(`${apiPrefix}/delete/${lnkId}`);
+    deleteLnk(data) {
+        return axios.delete(`${apiPrefix}/delete/`, { data: data });
     }
 }

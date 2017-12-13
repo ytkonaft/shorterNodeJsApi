@@ -35,10 +35,11 @@ const LnkActions = {
         );
     },
 
-    deleteLnk(userId,lnkId) {
-        api.deleteLnk(lnkId)
+    deleteLnk(lnk) {
+        console.log(lnk);
+        api.deleteLnk(lnk)
         .then(() =>
-            this.loadLnks(userId)
+            this.loadLnks(lnk.user)
         )
         .catch(err =>
             console.error(err)

@@ -26,7 +26,7 @@ var express = require('express'),
 
 	app.put('/update/:id', LinksController.update);
 
-	app.delete('/delete/:id', LinksController.delete);
+	app.delete('/delete/', LinksController.delete);
 
 
 

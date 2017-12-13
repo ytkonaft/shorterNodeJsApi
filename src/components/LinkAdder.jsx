@@ -5,6 +5,18 @@ import axios from 'axios';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 var timerId,
     gglKey ='AIzaSyC1hWR-KdjZtVkYp6jBggRmWLHVxPphWks';
+
+  function errorText(){
+    render: {
+      return (<div> Please check your url<small>protocols <b> http://</b> and <b> https://</b> are mandatory</small></div>)
+    }
+  }
+  function shortReject(){
+    render: {
+      return (<div>You can not cut it</div>)
+    }
+  }
+
 class LinkAdder extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +26,9 @@ class LinkAdder extends Component {
   		urlShort: '',
       img: '',
   		valid: false,
-      copied: false
+      copied: false,
+      hasError: false,
+      textError: ''
     	};
     this.handleLinkChange = this.handleLinkChange.bind(this);
     this.handleLinkAdd = this.handleLinkAdd.bind(this);
@@ -34,7 +48,9 @@ class LinkAdder extends Component {
   		this.setState({valid: false,
                       urlShort: '',
                       img: '',
-                      name: ''
+                      name: '',
+                      hasError: true,
+                      textError: errorText()
                     });
   		imgWrp.innerHTML = '';
   		imgWrp.classList.remove('has-img')
@@ -99,7 +115,11 @@ class LinkAdder extends Component {
       that.loadShortLnk({urlShort: response.data.id});
     })
     .catch((error)=>{
-      // that.loadShortLnk({urlShort: response.data.id});
+      that.setState({valid: false,
+                      hasError: true,
+                      name: '',
+                      textError: shortReject()
+                    })
       console.log(error);
     })
   }
@@ -140,14 +160,15 @@ class LinkAdder extends Component {
     				<div id="link-img"></div>
     			</div>
     			<div className="col-md-4">
-    				<div className="valid-wrp">
+    				<div className={`valid-wrp ${this.state.hasError? 'hasError': ''}`}>
 	    				<input type="text" id="urlInput" 
 	    								placeholder="Enter URL here"  
 	    								value={this.state.longUrl} 
+                      onBlur={this.checkBlur}
 	    								onChange={this.handleLinkChange}  
 	    								onFocus={this.checkFocus}/>
-	    				<div className="alert">Please check your url
-	    					<small>protocols <b> http://</b> and <b> https://</b> are mandatory</small>
+	    				<div className="alert">
+              {this.state.textError}
 	    				</div>				
     				</div>
     			</div>
