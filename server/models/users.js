@@ -9,6 +9,10 @@ exports.create = function(newUser,callback){
 }
 
 exports.checkEmail = function(email,callback){
+		if(email === '') {
+			console.log('zazaz');
+			return;
+		}
 		var answ = db.get().collection('users')
 			.findOne({'mail': email});
 			return answ;

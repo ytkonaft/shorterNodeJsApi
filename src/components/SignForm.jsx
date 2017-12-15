@@ -37,8 +37,8 @@ class SignForm extends Component {
 	}
 	handleSign(e){
 		e.preventDefault();
-		if(!this.checkAfterClick()){
-			console.log(this.checkAfterClick());
+		if(this.checkAfterClick()){
+			this.props.authError();
 			return false;
 		}
   		const User = {
@@ -108,7 +108,8 @@ class SignForm extends Component {
 			showAuth: true,
 			enterMode: mode,
 			pswrd: '',
-			confPswrd: ''
+			confPswrd: '',
+			showAlert: false
 	  })
 	  var formWrp = document.getElementById('enterForm');
 	  if(formWrp){
@@ -119,27 +120,22 @@ class SignForm extends Component {
 	  	}
 	}
 	signIn(e){
-	  this.resetForm('in');
+		this.resetForm('in');
 	}
 	signUp(e){
-  		this.resetForm('up')
+  		this.resetForm('up');
 	}  
 	checkAfterClick(e){
 		// e.preventDefault()
-		let inputColection = document.querySelectorAll('#enterForm .valid-wrp input');
+		let inputColection = document.querySelectorAll('#enterForm .valid-wrp input'),
+			errorsCount = 0;
 		for(var i = 0; i < inputColection.length; i++ ){
-			if( !this.validator(inputColection[i], inputColection[i].name)){
-				this.setState({authHasError: true});
-				this.props.authError();
-				inputColection[i].parentNode.classList.remove('valid')
+			if(!this.validator(inputColection[i], inputColection[i].name)){
 				inputColection[i].parentNode.classList.add('has-error');
-			}else{
-				this.setState({authError: false});
+				errorsCount ++;
 			}
-			console.log(this.validator(inputColection[i], inputColection[i].name));
-		}	
-		console.log('---',this.state.authHasError)
-		return	this.state.authHasError;
+		}
+		return errorsCount> 0 ?  true : false;
 	}
 	validator(elm,type){
 		switch (type) {
