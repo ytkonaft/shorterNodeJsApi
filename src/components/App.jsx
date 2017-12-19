@@ -62,7 +62,7 @@ class App extends Component {
       <section className="App">
         <header className={this.state.isLogined ? 'entered': 'notenter'}>
           <div className="container">
-            <div className="col-md-12">
+            <div className="col">
               <a id="logo" alt="logo"></a>
               <h1 className="App-title">the cutter <a><i>by</i> ufo-engineering</a></h1>
             </div>

@@ -35,6 +35,7 @@
     "react-dom": "^16.1.1",
     "react-motion": "^0.5.2",
     "react-scripts": "^1.0.17",
+    "sha1": "^1.1.1",
     "valid-url": "^1.0.9"
   }
 }

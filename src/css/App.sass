@@ -35,7 +35,8 @@ header
 	&.notenter
 		display: block
 		top: 50px
-		width: 400px 
+		max-width: 400px 
+		width: 100%
 		margin: 0 auto 0
 		border-radius: 15px
 		.col-sm-5,
@@ -344,3 +345,8 @@ header
 		background-position: center center 
 		background-repeat: no-repeat 
 		background-size: 10px
+
+@media screen and (max-width: 992px)
+	
+	#content
+		overflow: hidden		

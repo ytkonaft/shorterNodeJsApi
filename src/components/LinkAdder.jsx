@@ -183,7 +183,7 @@ class LinkAdder extends Component {
 
                   <CopyToClipboard text={this.state.urlShort}
                                     onCopy={() => this.setState({copied: true})}>
-                      <button className={this.state.valid ? 'up' : 'down'}/>
+                      <button className={this.state.urlShort!=='' && !this.state.copied ? 'up' : 'down'}/>
                   </CopyToClipboard>
  
             </div>        
